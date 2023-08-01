@@ -28,4 +28,17 @@ require([
   });
 
   view.ui.add(basemapToggle, "bottom-right");
+
+  const basemapGallery = new BasemapGallery({
+    view: view,
+
+    // Not needed in new releases:
+    // source: {
+    //   query: {
+    //     title: '"World Basemaps for Developers" AND owner:esri',
+    //   },
+    // },
+  });
+
+  view.ui.add(basemapGallery, "top-right");
 });
