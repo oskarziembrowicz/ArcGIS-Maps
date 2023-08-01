@@ -106,4 +106,39 @@ require([
   });
 
   map.add(bikeTrails, 1);
+
+  // This will fill every open space in the same way but with a unique colour
+  function createFillSymbol(value, color) {
+    return {
+      value: value,
+      symbol: {
+        color: color,
+        type: "simple-fill",
+        style: "solid",
+        outline: {
+          style: "none",
+        },
+      },
+      label: value,
+    };
+  }
+
+  const openSpacesRenderer = {
+    type: "unique-value",
+    field: "TYPE",
+    uniqueValueInfos: [
+      createFillSymbol("Natural Areas", "#9E559C"),
+      createFillSymbol("Regional Open Space", "#A7C636"),
+      createFillSymbol("Local Park", "#149ECE"),
+      createFillSymbol("Regional Recreation Park", "#ED5151"),
+    ],
+  };
+
+  const openSpaces = new FeatureLayer({
+    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Parks_and_Open_Space_Styled/FeatureServer/0",
+    renderer: openSpacesRenderer,
+    opacity: 0.4,
+  });
+
+  map.add(openSpaces, 0);
 });
