@@ -64,4 +64,73 @@ require([
   });
 
   map.add(trails);
+
+  // Open Spces pop-ups
+  const popupOpenSpaces = {
+    title: "{PARK_NAME}",
+    content: [
+      {
+        type: "fields",
+        fieldInfos: [
+          {
+            fieldName: "AGNCY_NAME",
+            label: "Agency",
+            isEditable: true,
+            tooltip: "",
+            visible: true,
+            format: null,
+            stringFieldOption: "text-box",
+          },
+          {
+            fieldName: "TYPE",
+            label: "Type",
+            isEditable: true,
+            tooltip: "",
+            visible: true,
+            format: null,
+            stringFieldOption: "text-box",
+          },
+          {
+            fieldName: "ACCESS_TYP",
+            label: "Access",
+            isEditable: true,
+            tooltip: "",
+            visible: true,
+            format: null,
+            stringFieldOption: "text-box",
+          },
+          {
+            fieldName: "GIS_ACRES",
+            label: "Acres",
+            isEditable: true,
+            tooltip: "",
+            visible: true,
+            format: {
+              places: 2,
+              digitSeparator: true,
+            },
+            stringFieldOption: "text-box",
+          },
+        ],
+      },
+    ],
+  };
+
+  const openSpaces = new FeatureLayer({
+    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Parks_and_Open_Space_Styled/FeatureServer/0",
+    outFields: [
+      "TYPE",
+      "PARK_NAME",
+      "AGNCY_NAME",
+      "ACCESS_TYP",
+      "GIS_ACRES",
+      "TRLS_MI",
+      "TOTAL_GOOD",
+      "TOTAL_FAIR",
+      "TOTAL_POOR",
+    ],
+    popupTemplate: popupOpenSpaces,
+  });
+
+  map.add(openSpaces);
 });
