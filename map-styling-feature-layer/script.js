@@ -80,11 +80,30 @@ require([
     ],
   };
 
-  const trailsLayer = new FeatureLayer({
+  const trails = new FeatureLayer({
     url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails_Styled/FeatureServer/0",
     renderer: trailsRenderer,
     opacity: 0.75,
   });
 
-  map.add(trailsLayer);
+  map.add(trails, 0);
+
+  const bikeTrailsRenderer = {
+    type: "simple",
+    symbol: {
+      type: "simple-line",
+      style: "short-dot",
+      color: "#0000FF",
+      width: "2px",
+    },
+  };
+
+  // This will be applyed only for bike trails
+  const bikeTrails = new FeatureLayer({
+    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails_Styled/FeatureServer/0",
+    renderer: bikeTrailsRenderer,
+    definitionExpression: "USE_BIKE = 'YES'", // SQL where clause
+  });
+
+  map.add(bikeTrails, 1);
 });
