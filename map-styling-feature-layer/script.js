@@ -58,4 +58,33 @@ require([
   });
 
   map.add(trailheads);
+
+  const trailsRenderer = {
+    type: "simple",
+    symbol: {
+      color: "#BA55D3",
+      type: "simple-line",
+      style: "solid",
+    },
+
+    // The line will be thicker the bigger is the elevation gain on the trail
+    visualVariables: [
+      {
+        type: "size",
+        field: "ELEV_GAIN",
+        minDataValue: 0,
+        maxDataValue: 2300,
+        minSize: "3px",
+        maxSize: "7px",
+      },
+    ],
+  };
+
+  const trailsLayer = new FeatureLayer({
+    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails_Styled/FeatureServer/0",
+    renderer: trailsRenderer,
+    opacity: 0.75,
+  });
+
+  map.add(trailsLayer);
 });
