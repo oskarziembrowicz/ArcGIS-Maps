@@ -21,7 +21,7 @@ require([
     zoom: 13,
   });
 
-  // Trailheads pop-up
+  // Trailheads pop-ups
   const popupTrailheads = {
     title: "Trailhead",
     content:
@@ -35,4 +35,33 @@ require([
   });
 
   map.add(trailheads);
+
+  // Trails pop-ups
+  const popupTrails = {
+    title: "Trail Information",
+    content: [
+      {
+        type: "media",
+        mediaInfos: [
+          {
+            type: "column-chart",
+            caption: "",
+            value: {
+              fields: ["ELEV_MIN", "ELEV_MAX"],
+              normalizeField: null,
+              tooltipField: "Min and max elevation values",
+            },
+          },
+        ],
+      },
+    ],
+  };
+
+  const trails = new FeatureLayer({
+    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails_Styled/FeatureServer/0",
+    outFields: ["TRL_NAME, ELEV_GAIN"],
+    popupTemplate: popupTrails,
+  });
+
+  map.add(trails);
 });
