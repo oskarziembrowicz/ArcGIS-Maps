@@ -24,7 +24,15 @@ require([
     portalItem: {
       id: "f3dcc26dd868456da288baca83b8a2cd",
     },
+    popupTemplate: {
+      title: "{name}",
+      content:
+        "<b>Typ:</b> {tourism} <br><b>Miejscowość:</b> {addr_city} <br><b>Adres:</b> {addr_street} {addr_housenumber} <br><b>Kod pocztowy:</b> {addr_postcode} <br><b>Strona internetowa:</b> {website}",
+    },
   });
 
   map.add(touristInformationLayer);
+
+  // Start from no visibility
+  // touristInformationLayer.visible = false;
 });
