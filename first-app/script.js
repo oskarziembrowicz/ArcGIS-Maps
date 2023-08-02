@@ -33,6 +33,13 @@ require([
 
   map.add(touristInformationLayer);
 
+  // We will see how it works
+  const streetsLayer = new FeatureLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+  });
+
+  map.add(streetsLayer);
+
   // Start from no visibility
   // touristInformationLayer.visible = false;
 });
