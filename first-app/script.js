@@ -19,4 +19,12 @@ require([
     container: "viewDiv",
     map: map,
   });
+
+  const touristInformationLayer = new FeatureLayer({
+    portalItem: {
+      id: "f3dcc26dd868456da288baca83b8a2cd",
+    },
+  });
+
+  map.add(touristInformationLayer);
 });
