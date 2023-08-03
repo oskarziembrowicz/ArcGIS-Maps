@@ -5,8 +5,18 @@ require([
   "esri/WebMap",
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
+  "esri/layers/WMSLayer",
   "esri/widgets/LayerList",
-], function (esriConfig, WebMap, MapView, FeatureLayer, LayerList) {
+  "esri/widgets/Search",
+], function (
+  esriConfig,
+  WebMap,
+  MapView,
+  FeatureLayer,
+  WMSLayer,
+  LayerList,
+  Search
+) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
@@ -35,19 +45,20 @@ require([
 
   map.add(touristInformationLayer);
 
-  // We will see how it works
-  // const wmsLayer = new FeatureLayer({
-  //   url: "wms.gdos.gov.pl/geoserver/wms?request=GetMap&service=WMS&VERSION=1.1.1&LAYERS=touristInformationLayer&FORMAT=image/png&WIDTH=400&HEIGHT=300&CRS=EPSG:2180&BBOX=734500,191000,738500,194000&styles=rezerwaty",
-  // });
+  const wmsLayer = new WMSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+  });
 
-  // map.add(wmsLayer);
-
-  // Start from no visibility
-  touristInformationLayer.visible = false;
+  map.add(wmsLayer);
 
   const layerList = new LayerList({
     view: view,
   });
 
   view.ui.add(layerList, "bottom-right");
+
+  const search = new Search({
+    view: view,
+  });
+  view.ui.add(search, "top-right");
 });
