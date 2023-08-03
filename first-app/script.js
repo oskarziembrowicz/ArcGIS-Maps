@@ -5,7 +5,8 @@ require([
   "esri/WebMap",
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
-], function (esriConfig, WebMap, MapView, FeatureLayer) {
+  "esri/widgets/LayerList",
+], function (esriConfig, WebMap, MapView, FeatureLayer, LayerList) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
@@ -24,6 +25,7 @@ require([
     portalItem: {
       id: "f3dcc26dd868456da288baca83b8a2cd",
     },
+    title: "Atrakcje turystyczne",
     popupTemplate: {
       title: "{name}",
       content:
@@ -34,12 +36,18 @@ require([
   map.add(touristInformationLayer);
 
   // We will see how it works
-  const streetsLayer = new FeatureLayer({
-    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
-  });
+  // const wmsLayer = new FeatureLayer({
+  //   url: "wms.gdos.gov.pl/geoserver/wms?request=GetMap&service=WMS&VERSION=1.1.1&LAYERS=touristInformationLayer&FORMAT=image/png&WIDTH=400&HEIGHT=300&CRS=EPSG:2180&BBOX=734500,191000,738500,194000&styles=rezerwaty",
+  // });
 
-  map.add(streetsLayer);
+  // map.add(wmsLayer);
 
   // Start from no visibility
-  // touristInformationLayer.visible = false;
+  touristInformationLayer.visible = false;
+
+  const layerList = new LayerList({
+    view: view,
+  });
+
+  view.ui.add(layerList, "bottom-right");
 });
