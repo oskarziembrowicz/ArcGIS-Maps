@@ -8,6 +8,7 @@ require([
   "esri/layers/WMSLayer",
   "esri/widgets/LayerList",
   "esri/widgets/Search",
+  "esri/widgets/Expand",
 ], function (
   esriConfig,
   WebMap,
@@ -15,7 +16,8 @@ require([
   FeatureLayer,
   WMSLayer,
   LayerList,
-  Search
+  Search,
+  Expand
 ) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
@@ -56,10 +58,26 @@ require([
     view: view,
   });
 
-  view.ui.add(layerList, "bottom-right");
+  // view.ui.add(layerList, "bottom-right");
+
+  const expandLayerList = new Expand({
+    view: view,
+    expandIcon: "layers",
+    content: layerList,
+  });
+
+  view.ui.add(expandLayerList, "bottom-right");
 
   const search = new Search({
     view: view,
   });
-  view.ui.add(search, "top-right");
+  // view.ui.add(search, "top-right");
+
+  const expandSearch = new Expand({
+    view: view,
+    expandIcon: "search",
+    content: search,
+  });
+
+  view.ui.add(expandSearch, "top-right");
 });
