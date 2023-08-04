@@ -46,7 +46,8 @@ require([
   map.add(touristInformationLayer);
 
   const wmsLayer = new WMSLayer({
-    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+    // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837%2C6552943.544830687%2C2557209.739994624%2C6553164.495615605&crs=EPSG%3857&format=image%2Fpng&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.1.0&layers=prg-adresy%2Cprg-ulice%2Cprg-place",
   });
 
   map.add(wmsLayer);
