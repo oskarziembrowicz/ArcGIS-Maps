@@ -31,6 +31,24 @@ require([
     ],
   });
 
+  const terrainModelLayer = new WMSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/ShadedRelief",
+    sublayers: [
+      {
+        name: "Raster",
+      },
+    ],
+  });
+
+  const boundariesLayer = new WMSLayer({
+    url: "https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow",
+    sublayers: [
+      {
+        name: "powiaty-obreby",
+      },
+    ],
+  });
+
   const wmsLayer = new WMSLayer({
     // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
     url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837,6552943.544830687,2557209.739994624,6553164.495615605&srs=EPSG:3857&format=image/png&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.3.0&layers=prg-adresy,prg-ulice,prg-place",
@@ -66,7 +84,13 @@ require([
     // basemap: {
     //   baselayers: [testLayer],
     // },
-    layers: [/* testLayer, */ wmsLayer, touristInformationLayer],
+    layers: [
+      /* testLayer, */
+      terrainModelLayer,
+      boundariesLayer,
+      wmsLayer,
+      touristInformationLayer,
+    ],
   });
 
   const view = new MapView({
