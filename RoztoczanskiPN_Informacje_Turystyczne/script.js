@@ -22,15 +22,29 @@ require([
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
-  const map = new WebMap({
-    portalItem: {
-      id: "3bf99800f41543a69ef3a062e5eb1581",
-    },
+  const testLayer = new WMSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/StandardResolution",
+    sublayers: [
+      {
+        name: "Raster",
+      },
+    ],
   });
 
-  const view = new MapView({
-    container: "viewDiv",
-    map: map,
+  const wmsLayer = new WMSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+    // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837,6552943.544830687,2557209.739994624,6553164.495615605&srs=EPSG:3857&format=image/png&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.3.0&layers=prg-adresy,prg-ulice,prg-place",
+    sublayers: [
+      {
+        name: "prg-adresy",
+      },
+      {
+        name: "prg-ulice",
+      },
+      {
+        name: "prg-place",
+      },
+    ],
   });
 
   const touristInformationLayer = new FeatureLayer({
@@ -45,20 +59,38 @@ require([
     },
   });
 
-  map.add(touristInformationLayer);
-
-  const wmsLayer = new WMSLayer({
-    // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
-    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837%2C6552943.544830687%2C2557209.739994624%2C6553164.495615605&crs=EPSG%3857&format=image%2Fpng&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.1.0&layers=prg-adresy%2Cprg-ulice%2Cprg-place",
+  const map = new WebMap({
+    portalItem: {
+      id: "3bf99800f41543a69ef3a062e5eb1581",
+    },
+    // basemap: {
+    //   baselayers: [testLayer],
+    // },
+    layers: [wmsLayer, touristInformationLayer],
   });
 
-  map.add(wmsLayer);
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    spatialReference: {
+      wkid: 3857,
+    },
+  });
+
+  // WMS
+
+  // const wmsLayer = new WMSLayer({
+  //   // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+  //   url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837%2C6552943.544830687%2C2557209.739994624%2C6553164.495615605&srs=EPSG:3857&format=image%2Fpng&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.1.0&layers=prg-adresy%2Cprg-ulice%2Cprg-place",
+  // });
+
+  // map.add(wmsLayer);
+
+  // WMS
 
   const layerList = new LayerList({
     view: view,
   });
-
-  // view.ui.add(layerList, "bottom-right");
 
   const expandLayerList = new Expand({
     view: view,
@@ -71,7 +103,6 @@ require([
   const search = new Search({
     view: view,
   });
-  // view.ui.add(search, "top-right");
 
   const expandSearch = new Expand({
     view: view,
