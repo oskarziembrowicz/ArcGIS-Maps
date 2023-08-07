@@ -33,6 +33,7 @@ require([
 
   const terrainModelLayer = new WMSLayer({
     url: "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/ShadedRelief",
+    opacity: 0.3,
     sublayers: [
       {
         name: "Raster",
@@ -44,14 +45,14 @@ require([
     url: "https://integracja.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow",
     sublayers: [
       {
-        name: "powiaty-obreby",
+        name: "dzialki",
       },
     ],
   });
 
-  const wmsLayer = new WMSLayer({
-    // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
-    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837,6552943.544830687,2557209.739994624,6553164.495615605&srs=EPSG:3857&format=image/png&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.3.0&layers=prg-adresy,prg-ulice,prg-place",
+  const streetsLayer = new WMSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
+    // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837,6552943.544830687,2557209.739994624,6553164.495615605&srs=EPSG:3857&format=image/png&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.3.0&layers=prg-adresy,prg-ulice,prg-place",
     sublayers: [
       {
         name: "prg-adresy",
@@ -87,8 +88,8 @@ require([
     layers: [
       /* testLayer, */
       terrainModelLayer,
+      streetsLayer,
       boundariesLayer,
-      wmsLayer,
       touristInformationLayer,
     ],
   });
@@ -97,20 +98,9 @@ require([
     container: "viewDiv",
     map: map,
     spatialReference: {
-      wkid: 3857,
+      wkid: 2180,
     },
   });
-
-  // WMS
-
-  // const wmsLayer = new WMSLayer({
-  //   // url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej",
-  //   url: "https://mapy.geoportal.gov.pl/wss/ext/KrajowaIntegracjaNumeracjiAdresowej?language=pol&width=360&height=740&bbox=2557102.2504235837%2C6552943.544830687%2C2557209.739994624%2C6553164.495615605&srs=EPSG:3857&format=image%2Fpng&request=GetMap&service=WMS&styles=&transparent=TRUE&version=1.1.0&layers=prg-adresy%2Cprg-ulice%2Cprg-place",
-  // });
-
-  // map.add(wmsLayer);
-
-  // WMS
 
   const layerList = new LayerList({
     view: view,

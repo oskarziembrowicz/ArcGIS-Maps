@@ -52,6 +52,7 @@ require([
 
   const terrainModelLayer = new WMSLayer({
     url: "https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/ShadedRelief",
+    opacity: 0.5,
     sublayers: [
       {
         name: "Raster",
@@ -73,7 +74,7 @@ require([
     //   baseLayers: [terrainModelLayer],
     // },
     basemap: "arcgis-light-gray",
-    layers: [terrainModelLayer, streetsLayer, boundariesLayer],
+    layers: [/*terrainModelLayer*/ streetsLayer, boundariesLayer],
   });
 
   const view = new MapView({
