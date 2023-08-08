@@ -7,6 +7,7 @@ require([
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
   "esri/layers/WMSLayer",
+  "esri/layers/WMTSLayer",
   "esri/widgets/LayerList",
   "esri/widgets/Search",
   "esri/widgets/Expand",
@@ -17,6 +18,7 @@ require([
   MapView,
   FeatureLayer,
   WMSLayer,
+  WMTSLayer,
   LayerList,
   Search,
   Expand
@@ -80,6 +82,13 @@ require([
     },
   });
 
+  const topographicLayer = new WMTSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/G2_MOBILE_500",
+    activeLayer: {
+      id: "G2_MOBILE_500",
+    },
+  });
+
   // const map = new WebMap({
   //   portalItem: {
   //     id: "3bf99800f41543a69ef3a062e5eb1581",
@@ -97,21 +106,23 @@ require([
   // });
 
   const map = new Map({
-    layers: [
-      /* testLayer, */
-      terrainModelLayer,
-      streetsLayer,
-      boundariesLayer,
-      touristInformationLayer,
-    ],
+    basemap: {
+      baseLayers: [topographicLayer],
+    },
+    // layers: [
+    //   /* testLayer, */
+    //   terrainModelLayer,
+    //   streetsLayer,
+    //   boundariesLayer,
+    //   touristInformationLayer,
+    // ],
   });
 
   const view = new MapView({
     container: "viewDiv",
     map: map,
     center: [23.013015, 50.611453],
-    // zoom: 13,
-    scale: 250000,
+    scale: 60000,
     spatialReference: {
       wkid: 2180,
     },
