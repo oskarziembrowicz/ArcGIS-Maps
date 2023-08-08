@@ -5,12 +5,26 @@ require([
   "esri/Map",
   "esri/views/MapView",
   "esri/views/SceneView",
-], function (esriConfig, Map, MapView, SceneView) {
+  "esri/layers/FeatureLayer",
+], function (esriConfig, Map, MapView, SceneView, FeatureLayer) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
+  const atractionsLayer = new FeatureLayer({
+    portalItem: {
+      id: "f3dcc26dd868456da288baca83b8a2cd",
+    },
+    title: "Atrakcje turystyczne",
+    popupTemplate: {
+      title: "{name}",
+      content:
+        "<b>Typ:</b> {tourism} <br><b>Miejscowość:</b> {addr_city} <br><b>Adres:</b> {addr_street} {addr_housenumber} <br><b>Kod pocztowy:</b> {addr_postcode} <br><b>Strona internetowa:</b> {website}",
+    },
+  });
+
   const map = new Map({
     basemap: "arcgis-topographic",
+    layers: [atractionsLayer],
   });
 
   const viewOptions = {
