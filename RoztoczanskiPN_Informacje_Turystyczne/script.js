@@ -109,13 +109,13 @@ require([
     basemap: {
       baseLayers: [topographicLayer],
     },
-    // layers: [
-    //   /* testLayer, */
-    //   terrainModelLayer,
-    //   streetsLayer,
-    //   boundariesLayer,
-    //   touristInformationLayer,
-    // ],
+    layers: [
+      /* testLayer, */
+      terrainModelLayer,
+      streetsLayer,
+      boundariesLayer,
+      touristInformationLayer,
+    ],
   });
 
   const view = new MapView({
