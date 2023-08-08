@@ -6,7 +6,8 @@ require([
   "esri/views/MapView",
   "esri/views/SceneView",
   "esri/layers/FeatureLayer",
-], function (esriConfig, Map, MapView, SceneView, FeatureLayer) {
+  "esri/layers/TileLayer",
+], function (esriConfig, Map, MapView, SceneView, FeatureLayer, TileLayer) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
@@ -22,7 +23,16 @@ require([
     },
   });
 
+  const openStreetMap = new TileLayer({
+    portalItem: {
+      id: "3e1a00aeae81496587988075fe529f71",
+    },
+  });
+
   const map = new Map({
+    // basemap: {
+    //   baseLayers: [openStreetMap],
+    // },
     basemap: "arcgis-topographic",
     layers: [atractionsLayer],
   });
