@@ -6,8 +6,15 @@ require([
   "esri/views/MapView",
   "esri/views/SceneView",
   "esri/layers/FeatureLayer",
-  "esri/layers/TileLayer",
-], function (esriConfig, Map, MapView, SceneView, FeatureLayer, TileLayer) {
+  "esri/layers/VectorTileLayer",
+], function (
+  esriConfig,
+  Map,
+  MapView,
+  SceneView,
+  FeatureLayer,
+  VectorTileLayer
+) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
@@ -23,17 +30,19 @@ require([
     },
   });
 
-  const openStreetMap = new TileLayer({
+  const openStreetMap = new VectorTileLayer({
     portalItem: {
-      id: "3e1a00aeae81496587988075fe529f71",
+      // id: "3e1a00aeae81496587988075fe529f71",
+      id: "8f9cb35cec274e25b4c5d6add631f1f0",
+      // id: "fd3e3d0f97204bd8a4c2167ab2f669f0",
     },
   });
 
   const map = new Map({
-    // basemap: {
-    //   baseLayers: [openStreetMap],
-    // },
-    basemap: "arcgis-topographic",
+    basemap: {
+      baseLayers: [openStreetMap],
+    },
+    // basemap: "arcgis-topographic",
     layers: [atractionsLayer],
   });
 
