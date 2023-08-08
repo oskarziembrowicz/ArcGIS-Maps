@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+      .viewDivBase {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 49.9%;
+      }
+      #viewDiv2d {
+        float: left;
+      }
+
+      #viewDiv3d {
+        float: right;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.27/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.27/"></script>
+
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="viewDivBase" id="viewDiv2d"></div>
+    <div class="viewDivBase" id="viewDiv3d"></div>
+  </body>
+</html>
