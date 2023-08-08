@@ -80,10 +80,10 @@ require([
   });
 
   const map = new Map({
-    basemap: {
-      baseLayers: [topographicLayer],
-    },
-    // basemap: "arcgis-light-gray",
+    // basemap: {
+    //   baseLayers: [topographicLayer],
+    // },
+    basemap: "arcgis-light-gray",
     // layers: [/*terrainModelLayer*/ streetsLayer, boundariesLayer],
   });
 
@@ -91,11 +91,12 @@ require([
     container: "viewDiv",
     map: map,
     center: [23.013015, 50.611453],
-    // zoom: 13,
+    zoom: 13,
     // scale: 250000,
-    spatialReference: {
-      wkid: 2180,
-    },
+    // spatialReference: {
+    //   // wkid: 2180,
+    //   wkid: 3857,
+    // },
   });
 
   const layerList = new LayerList({

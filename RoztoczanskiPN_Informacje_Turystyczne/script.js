@@ -2,6 +2,7 @@
 
 require([
   "esri/config",
+  "esri/Map",
   "esri/WebMap",
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
@@ -11,6 +12,7 @@ require([
   "esri/widgets/Expand",
 ], function (
   esriConfig,
+  Map,
   WebMap,
   MapView,
   FeatureLayer,
@@ -78,13 +80,23 @@ require([
     },
   });
 
-  const map = new WebMap({
-    portalItem: {
-      id: "3bf99800f41543a69ef3a062e5eb1581",
-    },
-    // basemap: {
-    //   baselayers: [testLayer],
-    // },
+  // const map = new WebMap({
+  //   portalItem: {
+  //     id: "3bf99800f41543a69ef3a062e5eb1581",
+  //   },
+  //   // basemap: {
+  //   //   baselayers: [testLayer],
+  //   // },
+  //   layers: [
+  //     /* testLayer, */
+  //     terrainModelLayer,
+  //     streetsLayer,
+  //     boundariesLayer,
+  //     touristInformationLayer,
+  //   ],
+  // });
+
+  const map = new Map({
     layers: [
       /* testLayer, */
       terrainModelLayer,
@@ -97,6 +109,9 @@ require([
   const view = new MapView({
     container: "viewDiv",
     map: map,
+    center: [23.013015, 50.611453],
+    // zoom: 13,
+    scale: 250000,
     spatialReference: {
       wkid: 2180,
     },
