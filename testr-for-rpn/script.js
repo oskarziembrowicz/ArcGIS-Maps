@@ -5,8 +5,9 @@ require([
   "esri/Map",
   "esri/views/MapView",
   "esri/layers/WMSLayer",
+  "esri/layers/WMTSLayer",
   "esri/widgets/LayerList",
-], function (esriConfig, Map, MapView, WMSLayer, LayerList) {
+], function (esriConfig, Map, MapView, WMSLayer, WMTSLayer, LayerList) {
   esriConfig.apiKey =
     "AAPK1048c04e0d1a4046b15f7383bf8d72e555Dqjx7S4pgbyhPx5Tug3bRK3MwLF4eHcK3Y3n1c9uao-mV4gfHuKQtSKLXMuOVn";
 
@@ -69,17 +70,29 @@ require([
     ],
   });
 
+  const topographicLayer = new WMTSLayer({
+    url: "https://mapy.geoportal.gov.pl/wss/service/WMTS/guest/wmts/G2_MOBILE_500",
+    activeLayer: {
+      id: "G2_MOBILE_500",
+      tileMatrixSetId: "EPSG:2180",
+    },
+    seviceMode: "KVP",
+  });
+
   const map = new Map({
-    // basemap: {
-    //   baseLayers: [terrainModelLayer],
-    // },
-    basemap: "arcgis-light-gray",
-    layers: [/*terrainModelLayer*/ streetsLayer, boundariesLayer],
+    basemap: {
+      baseLayers: [topographicLayer],
+    },
+    // basemap: "arcgis-light-gray",
+    // layers: [/*terrainModelLayer*/ streetsLayer, boundariesLayer],
   });
 
   const view = new MapView({
     container: "viewDiv",
     map: map,
+    center: [23.013015, 50.611453],
+    // zoom: 13,
+    // scale: 250000,
     spatialReference: {
       wkid: 2180,
     },
