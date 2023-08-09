@@ -138,6 +138,22 @@ require([
   });
   view2d.ui.add(home, "top-left");
 
+  const daylight = new Daylight({
+    view: view3d,
+    dateOrSeason: "season",
+    playSpeedMultiplier: 2,
+    visibleElements: {
+      sunLightingToggle: false,
+      shadowsToggle: false,
+      timezone: false,
+    },
+  });
+  const expandDaylight = new Expand({
+    view: view3d,
+    content: daylight,
+  });
+  view3d.ui.add(expandDaylight, "top-right");
+
   // Synchronize views:
 
   const views = [view2d, view3d];
