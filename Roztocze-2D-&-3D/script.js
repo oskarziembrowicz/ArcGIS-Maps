@@ -7,6 +7,7 @@ require([
   "esri/views/SceneView",
   "esri/layers/FeatureLayer",
   "esri/layers/VectorTileLayer",
+  "esri/layers/BaseElevationLayer",
   "esri/layers/ElevationLayer",
 ], function (
   esriConfig,
@@ -15,6 +16,7 @@ require([
   SceneView,
   FeatureLayer,
   VectorTileLayer,
+  BaseElevationLayer,
   ElevationLayer
 ) {
   esriConfig.apiKey =
@@ -40,19 +42,47 @@ require([
     },
   });
 
+  const elevationLayer = new ElevationLayer({
+    url: "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer",
+  });
+
+  const ExageratedElevationLayer = BaseElevationLayer.createSubclass({
+    load: function () {
+      this._elevation = elevationLayer;
+      this.addResolvingPromise(this._elevation.load());
+      this.exaggeration = 1.5;
+    },
+    fetchTile: function (level, row, col, options) {
+      return this._elevation.fetchTile(level, row, col, options).then(
+        function (data) {
+          let exaggeration = this.exaggeration;
+          for (let i = 0; i < data.values.length; i++) {
+            if (data.values[i] !== data.noDataValue) {
+              data.values[i] *= exaggeration;
+            }
+          }
+          return data;
+        }.bind(this)
+      );
+    },
+  });
+
   const map = new Map({
     basemap: {
       baseLayers: [openStreetMap],
     },
-    ground: "world-elevation",
-    // basemap: "arcgis-topographic",
+    // ground: "world-elevation",
+    ground: {
+      // layers: [elevationLayer],
+      layers: [new ExageratedElevationLayer()],
+    },
     layers: [atractionsLayer],
   });
 
   const viewOptions = {
     map: map,
     center: [23.013015, 50.611453],
-    zoom: 13,
+    zoom: 12,
   };
 
   const view2d = new MapView(viewOptions);
