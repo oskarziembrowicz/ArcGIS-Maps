@@ -2,11 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta
+    <!-- <meta
       name="viewport"
       content="initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+    /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atrakcje turystyczne Roztocza</title>
 
     <style>
       html,
@@ -15,7 +16,7 @@
         margin: 0;
         height: 100%;
       }
-      .viewDivBase {
+      /* .viewDivBase {
         padding: 0;
         margin: 0;
         height: 100%;
@@ -27,6 +28,28 @@
 
       #viewDiv3d {
         float: right;
+      } */
+
+      .view2d {
+        padding: 0;
+        width: 49.9%;
+        height: 100%;
+        float: left;
+      }
+
+      .view3d {
+        padding: 0;
+        width: 49.9%;
+        height: 100%;
+        float: right;
+      }
+
+      @media screen and (max-width: 800px) {
+        .view2d,
+        .view3d {
+          width: 100%;
+          height: 49.9%;
+        }
       }
     </style>
 
@@ -39,7 +62,9 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div class="viewDivBase" id="viewDiv2d"></div>
-    <div class="viewDivBase" id="viewDiv3d"></div>
+    <!-- <div class="viewDivBase" id="viewDiv2d"></div>
+    <div class="viewDivBase" id="viewDiv3d"></div> -->
+    <div class="view2d" id="viewDiv2d"></div>
+    <div class="view3d" id="viewDiv3d"></div>
   </body>
 </html>
