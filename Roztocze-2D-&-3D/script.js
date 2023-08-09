@@ -60,6 +60,14 @@ require([
 
   const view3d = new SceneView(viewOptions);
   view3d.container = "viewDiv3d";
+  view3d.camera = {
+    position: {
+      longitude: viewOptions.center[0],
+      latitude: viewOptions.center[1],
+      z: 2000,
+    },
+    tilt: 75,
+  };
 
   const views = [view2d, view3d];
   let active; // Currently 'active' view
