@@ -1,7 +1,14 @@
 "use strict";
 
 let splashScreen = document.querySelector(".splash-screen");
-splashScreen.addEventListener("click", () => {
+const button = document.querySelector(".button");
+const checkbox = document.getElementById("never-show-checkbox");
+// if (localStorage.getItem("never-show-checkbox") !== checkbox.checked) {
+//   splashScreen.classList.remove("hidden");
+// }
+console.log(localStorage.getItem("never-show-checkbox"));
+
+button.addEventListener("click", () => {
   splashScreen.classList.add("hidden");
 });
 
