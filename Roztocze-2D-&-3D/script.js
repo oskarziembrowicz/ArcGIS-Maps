@@ -185,6 +185,7 @@ require([
   const expandLineOfSightTool = new Expand({
     view: view3d,
     content: lineOfSightTool,
+    expandIcon: "view-visible",
   });
   view3d.ui.add(expandLineOfSightTool, "top-right");
 
