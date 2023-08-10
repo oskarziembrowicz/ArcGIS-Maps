@@ -1,5 +1,10 @@
 "use strict";
 
+let splashScreen = document.querySelector(".splash-screen");
+splashScreen.addEventListener("click", () => {
+  splashScreen.classList.add("hidden");
+});
+
 require([
   "esri/config",
   "esri/Map",
