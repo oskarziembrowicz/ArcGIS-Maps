@@ -1,7 +1,5 @@
 "use strict";
 
-// localStorage.setItem("never-show-checkbox", false);
-
 let splashScreen = document.querySelector(".splash-screen");
 const button = document.querySelector(".button");
 const checkbox = document.getElementById("never-show-checkbox");
