@@ -14,6 +14,9 @@ require([
   "esri/widgets/ScaleBar",
   "esri/widgets/Home",
   "esri/widgets/Daylight",
+  "esri/widgets/Measurement",
+  "esri/widgets/ElevationProfile",
+  "esri/widgets/LineOfSight",
   "esri/widgets/Expand",
 ], function (
   esriConfig,
@@ -29,6 +32,9 @@ require([
   ScaleBar,
   Home,
   Daylight,
+  Measurement,
+  ElevationProfile,
+  LineOfSight,
   Expand
 ) {
   esriConfig.apiKey =
@@ -153,6 +159,34 @@ require([
     content: daylight,
   });
   view3d.ui.add(expandDaylight, "top-right");
+
+  // const measurement = new Measurement({
+  //   view: view2d,
+  //   activeTool: "distance",
+  // });
+  // const expandMeasurement = new Expand({
+  //   view: view2d,
+  //   content: measurement,
+  // });
+  // view2d.ui.add(expandMeasurement, "top-right");
+
+  const elevetionProfileTool = new ElevationProfile({
+    view: view3d,
+  });
+  const expandElevationProfileTool = new Expand({
+    view: view3d,
+    content: elevetionProfileTool,
+  });
+  view3d.ui.add(expandElevationProfileTool, "top-right");
+
+  const lineOfSightTool = new LineOfSight({
+    view: view3d,
+  });
+  const expandLineOfSightTool = new Expand({
+    view: view3d,
+    content: lineOfSightTool,
+  });
+  view3d.ui.add(expandLineOfSightTool, "top-right");
 
   // Synchronize views:
 
