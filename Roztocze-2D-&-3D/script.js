@@ -1,15 +1,21 @@
 "use strict";
 
+// localStorage.setItem("never-show-checkbox", false);
+
 let splashScreen = document.querySelector(".splash-screen");
 const button = document.querySelector(".button");
 const checkbox = document.getElementById("never-show-checkbox");
-// if (localStorage.getItem("never-show-checkbox") !== checkbox.checked) {
-//   splashScreen.classList.remove("hidden");
-// }
 console.log(localStorage.getItem("never-show-checkbox"));
+
+if (localStorage.getItem("never-show-checkbox") === "false") {
+  console.log("Hide");
+  splashScreen.classList.remove("hidden");
+}
 
 button.addEventListener("click", () => {
   splashScreen.classList.add("hidden");
+  localStorage.setItem("never-show-checkbox", checkbox.checked);
+  console.log(localStorage.getItem("never-show-checkbox"));
 });
 
 require([
