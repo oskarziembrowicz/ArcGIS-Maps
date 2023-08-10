@@ -29,6 +29,32 @@
         float: right;
       }
 
+      .splashScreen {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        height: 50%;
+        width: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black;
+        transition: all ease-in-out 600ms;
+      }
+
+      .hidden {
+        transition: 0.5s;
+        display: none;
+      }
+
+      .splashScreenHeader {
+        height: 90%;
+        color: white;
+        font-family: consolas;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       @media screen and (max-width: 800px) {
         .viewDivBase {
           width: 100%;
@@ -48,5 +74,10 @@
   <body>
     <div class="viewDivBase" id="viewDiv2d"></div>
     <div class="viewDivBase" id="viewDiv3d"></div>
+    <div class="splashScreen">
+      <h1 class="splashScreenHeader">
+        To aplikacja przedstawiająca atrakcje turystyczne w Polsce.
+      </h1>
+    </div>
   </body>
 </html>
