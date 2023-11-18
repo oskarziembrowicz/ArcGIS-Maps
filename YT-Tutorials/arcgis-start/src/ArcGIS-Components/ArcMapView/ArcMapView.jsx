@@ -1,13 +1,9 @@
-import { useEffect, useRef } from "react";
-
-import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
-import Graphic from "@arcgis/core/Graphic";
-import Point from "@arcgis/core/geometry/Point";
-import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+import { useEffect, useRef, useState } from "react";
 
 import "./ArcMapView.css";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
+import { MapViewContext } from "../Contexts/MapViewContext";
 
 function createMapView(container) {
   const map = new Map({
@@ -21,32 +17,24 @@ function createMapView(container) {
   });
 }
 
-export const ArcMapView = () => {
+export const ArcMapView = ({ children }) => {
   const mapRef = useRef(null);
+
+  const [view, setView] = useState();
 
   useEffect(() => {
     if (!mapRef?.current) return;
 
-    const view = createMapView(mapRef.current);
+    const _view = createMapView(mapRef.current);
+    setView(_view);
 
-    const graphicsLayer = new GraphicsLayer();
-    view.map.add(graphicsLayer);
-
-    const point = new Point({
-      longitude: 55,
-      latitude: 25,
-    });
-    const simpleMarkerSymbol = new SimpleMarkerSymbol({
-      color: "red",
-    });
-    const graphicPoint = new Graphic({
-      geometry: point,
-      symbol: simpleMarkerSymbol,
-    });
-
-    graphicsLayer.add(graphicPoint);
-
-    return () => view && view.destroy();
+    return () => _view && _view.destroy();
   }, []);
-  return <div className="viewDiv" ref={mapRef}></div>;
+  return (
+    <div className="viewDiv" ref={mapRef}>
+      <MapViewContext.Provider value={{ view }}>
+        {children}
+      </MapViewContext.Provider>
+    </div>
+  );
 };
