@@ -56,7 +56,16 @@ function App() {
   });
 
   return (
-    <ArcMapView mapProperies={{ basemap }}>
+    <ArcMapView
+      mapProperies={{ basemap }}
+      onClick={(e) => {
+        const { longitude, latitude } = e.mapPoint;
+        console.log({ longitude, latitude });
+        const { x, y } = e;
+        console.log({ x, y });
+        console.log("=====");
+      }}
+    >
       <ArcGraphicsLayer>
         <ArcGraphic geometry={point} symbol={simpleMarkerSymbol} />
         <ArcGraphic geometry={polyline} symbol={simpleLineSymbol} />

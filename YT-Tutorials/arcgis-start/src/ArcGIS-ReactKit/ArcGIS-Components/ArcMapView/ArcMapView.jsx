@@ -7,7 +7,7 @@ import "./ArcMapView.css";
 import { MapViewContext } from "../Contexts/MapViewContext";
 import { createMapView } from "../../ArcGIS-SDK";
 
-export const ArcMapView = ({ children, mapProperies }) => {
+export const ArcMapView = ({ children, mapProperies, onClick }) => {
   const mapRef = useRef(null);
 
   const [view, setView] = useState();
@@ -26,6 +26,14 @@ export const ArcMapView = ({ children, mapProperies }) => {
 
     view.map.basemap = Basemap.fromId(mapProperies.basemap);
   }, [view, mapProperies]);
+
+  useEffect(() => {
+    if (!view || !onClick) return;
+
+    const handle = view.on("click", onClick);
+
+    return () => handle.remove();
+  }, [view, onClick]);
 
   return (
     <div className="viewDiv" ref={mapRef}>
