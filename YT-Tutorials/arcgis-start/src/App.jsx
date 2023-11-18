@@ -1,17 +1,26 @@
-import { ArcGraphic, ArcGraphicsLayer, ArcMapView } from "./ArcGIS-ReactKit";
+import {
+  ArcGraphic,
+  ArcGraphicsLayer,
+  ArcMapView,
+  createSimpleMarkerSymbol,
+} from "./ArcGIS-ReactKit";
 import { createPoint } from "./ArcGIS-ReactKit";
 import "./App.css";
 
 function App() {
   const point = createPoint({
-    longitiude: 55,
+    longitude: 55,
     latitude: 25,
+  });
+
+  const simpleMarkerSymbol = createSimpleMarkerSymbol({
+    color: "red",
   });
 
   return (
     <ArcMapView>
       <ArcGraphicsLayer>
-        <ArcGraphic geometry={point} />
+        <ArcGraphic geometry={point} symbol={simpleMarkerSymbol} />
       </ArcGraphicsLayer>
     </ArcMapView>
   );

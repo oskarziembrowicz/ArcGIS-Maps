@@ -4,18 +4,14 @@ import Graphic from "@arcgis/core/Graphic";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 import { GraphicsLayerContext } from "../Contexts/GraphicsLayerContext";
 
-export const ArcGraphic = ({ geometry }) => {
+export const ArcGraphic = ({ geometry, symbol }) => {
   const { graphicsLayer } = useContext(GraphicsLayerContext);
   const [graphic, setGraphic] = useState();
 
   useEffect(() => {
-    const simpleMarkerSymbol = new SimpleMarkerSymbol({
-      color: "red",
-    });
-
     const graphicPoint = new Graphic({
       geometry: geometry,
-      symbol: simpleMarkerSymbol,
+      symbol: symbol,
     });
 
     setGraphic(graphicPoint);

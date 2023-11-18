@@ -1,21 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import "./ArcMapView.css";
-import MapView from "@arcgis/core/views/MapView";
-import Map from "@arcgis/core/Map";
-import { MapViewContext } from "../Contexts/MapViewContext";
 
-function createMapView(container) {
-  const map = new Map({
-    basemap: "osm",
-  });
-  return new MapView({
-    map: map,
-    container: container,
-    center: [55, 25],
-    zoom: 13,
-  });
-}
+import { MapViewContext } from "../Contexts/MapViewContext";
+import { createMapView } from "../../ArcGIS-SDK";
 
 export const ArcMapView = ({ children }) => {
   const mapRef = useRef(null);
