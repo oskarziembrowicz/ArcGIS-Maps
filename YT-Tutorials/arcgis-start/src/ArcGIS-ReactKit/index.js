@@ -5,6 +5,8 @@ export { ArcMapView, ArcGraphic, ArcGraphicsLayer } from "./ArcGIS-Components";
 export {
   createPoint,
   createPolyline,
+  createPolygon,
   createSimpleMarkerSymbol,
   createSimpleLineSymbol,
+  createSimpleFillSymbol,
 } from "./ArcGIS-SDK";
