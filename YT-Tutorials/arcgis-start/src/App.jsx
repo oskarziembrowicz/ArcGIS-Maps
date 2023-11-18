@@ -10,8 +10,11 @@ import {
 } from "./ArcGIS-ReactKit";
 import { createPoint } from "./ArcGIS-ReactKit";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [basemap, setBasemap] = useState("satellite");
+
   const point = createPoint({
     longitude: 55,
     latitude: 25,
@@ -53,7 +56,7 @@ function App() {
   });
 
   return (
-    <ArcMapView>
+    <ArcMapView mapProperies={{ basemap }}>
       <ArcGraphicsLayer>
         <ArcGraphic geometry={point} symbol={simpleMarkerSymbol} />
         <ArcGraphic geometry={polyline} symbol={simpleLineSymbol} />
