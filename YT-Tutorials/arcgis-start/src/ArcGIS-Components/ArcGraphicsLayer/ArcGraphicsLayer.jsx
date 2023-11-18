@@ -6,7 +6,7 @@ import Point from "@arcgis/core/geometry/Point";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 import { MapViewContext } from "../Contexts/MapViewContext";
 
-export const ArcGraphicsLayer = () => {
+export const ArcGraphicsLayer = ({ children }) => {
   const { view } = useContext(MapViewContext);
 
   const [graphicsLayer, setGraphicsLayer] = useState();
@@ -39,5 +39,5 @@ export const ArcGraphicsLayer = () => {
     view.map.add(graphicsLayer);
   }, [view, graphicsLayer]);
 
-  return <></>;
+  return <>{children}</>;
 };
